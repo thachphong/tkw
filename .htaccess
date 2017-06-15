@@ -1,0 +1,14 @@
+RewriteEngine on
+RewriteBase /thietkeweb
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpg|jpeg|png|gif|css)$">
+        Header set Cache-Control "max-age=2678400, public, Etag=\"4230572gsdg082f209582d\" "
+    </FilesMatch>    
+    <FilesMatch "\.js$">
+        Header set Cache-Control "max-age=2678400, private, Etag=\"4230572gsdg082f209582d\""
+    </FilesMatch>
+</IfModule>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^(.*\.(png|jpg|jpeg|gif|bmp|ico|css|js))$ [NC]
+RewriteRule ^(.*)$ index.php?acw_url_cmd=$1 [QSA,L]
+
