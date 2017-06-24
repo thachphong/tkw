@@ -10,7 +10,12 @@
     <title>Admin! | </title>
 
     <%include 'include/header.html'%>
-   
+    <style>
+    	.title_small{
+    		background: rgba(5, 157, 129, 0.42);
+    		color: #000;
+    	}
+    </style>
   </head>
   <%assign var='login_info' value=ACWSession::get('user_info')%>
   <body class="nav-md">
@@ -35,90 +40,38 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Thiết lập template</h2>
-                    <ul class="nav navbar-rigth panel_toolbox" style="min-width: auto;">                      
+                    <!--<ul class="nav navbar-rigth panel_toolbox" style="min-width: auto;">                      
                       <li><label style="margin: 5px 5px 0px 0;">Tìm</label>                        	
                       </li>                      
                       <li><input type="search" id="table_search" class="form-control input-sm" style="float: right;width: 88%">
                       </li>
-                    </ul>
+                    </ul>-->
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">                    
 					 <div class="row">
 					 	<div class="col-md-12 col-sm-12 col-xs-12">
 					 	<form id="form_setting" action="" class="form-horizontal form-label-left" enctype="multipart/form-data">
-					 		 <div class="x_title">
-					 		 	<h4>Menu top</h4>
-					 		 </div>
-					 		 <%assign var='chk_line' value=-1%> 
-					 		 <%foreach $list as $key=>$item%>
-					 		 	 <%assign var='chk_line' value=$chk_line+1%>	
-					 		 	 <%if $chk_line == 0 %>
-					 		 	 	<div class="form-group">
-					 		 	 <%else if $chk_line%3 == 0 %>
-					 		 	 	</div>
-					 		 	 	<div class="form-group">
-					 		 	 <%else if $item.new_line == 1 %>
-					 		 	 	</div>
-					 		 	 	<div class="form-group">
-					 		 	 	<%assign var='chk_line' value=0%>
-					 		 	 <%/if%>
-					 		 	 <label class="control-label col-md-2 col-sm-2 col-xs-12"><%$item.struct_name%></label>
-                        		 <div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="<%$item.type%>" class="form-control col-md-2 col-xs-12" name="struct[<%$item.struct_id%>_<%$item.template_detail_id%>]" value="<%$item.struct_val%>">
-                        		 </div>
-                        		  
-					 		 <%/foreach%>
-					 		 	</div>
-	                    	<!--<div class="form-group">
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Màu nền cấp 1</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[background1|]" value="">
-                        		</div>
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Màu chữ cấp 1</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[color1|]">
-                        		</div>
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Cỡ chữ cấp 1</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="number" class="form-control col-md-2 col-xs-12" name="menu_top[font_size1|]">
-                        		</div>
-                        	</div>
-                        	<div class="form-group">
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Hiệu ứng màu nền cấp 1</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[background_hover1|]">
-                        		</div>
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">H.ứng màu chữ cấp 1</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[color_hover1|]">
-                        		</div>                        		
-                        	</div>
-                        	<div class="form-group">
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Màu nền cấp 2</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[background2|]">
-                        		</div>
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Màu chữ cấp 2</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[color2|]">
-                        		</div>
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12" >Cỡ chữ cấp 1</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="number" class="form-control col-md-2 col-xs-12" name="menu_top[font_size2|]">
-                        		</div>
-                        	</div>
-                        	<div class="form-group">
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">Hiệu ứng màu nền cấp 2</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[background_hover2|]">
-                        		</div>
-                        		<label class="control-label col-md-2 col-sm-2 col-xs-12">H.ứng màu chữ cấp 2</label>
-                        		<div class="col-md-2 col-sm-2 col-xs-12">
-                        			<input type="color" class="form-control col-md-2 col-xs-12" name="menu_top[color_hover2|]">
-                        		</div>
-                        		
-                        	</div>-->
+					 		 <!--body -->
+					 		 <%assign var='module_name' value='Body'%> 
+					 		 <%assign var='data_list' value=$body%> 
+	                    	 <%include 'template/module.html'%>
+	                    	 <!--end body -->
+	                    	 <!--logo -->
+					 		 <%assign var='module_name' value='Logo'%> 
+					 		 <%assign var='data_list' value=$logo%> 
+	                    	 <%include 'template/module.html'%>
+	                    	 <!--end logo -->
+					 		 <!--menu -->
+					 		 <%assign var='module_name' value='Menu top'%> 
+					 		 <%assign var='data_list' value=$menu_top%> 
+	                    	 <%include 'template/module.html'%>
+	                    	 <!--end menu -->
+					 		 <!--slide -->
+					 		 <%assign var='module_name' value='Slide top'%> 
+					 		 <%assign var='data_list' value=$slide_top%> 
+	                    	 <%include 'template/module.html'%>
+	                    	 <!--end slide -->
                         	<div class="form-group">
 		                        <div class="col-md-12 col-sm-12" style="text-align: center">
 		                          <!--<a class="dialog_close btn btn-primary" href="<%$smarty.const.ACW_BASE_URL%>template">Thoát</a>-->
