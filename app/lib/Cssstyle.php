@@ -14,6 +14,7 @@ class Cssstyle_lib
 	public $font_size;
 	public $font_family;
 	public $font_weight;
+	public $font_style;
 	public $position;
 	public $display;
 	public $padding;
@@ -38,6 +39,7 @@ class Cssstyle_lib
 	public $white_space;
 	public $text_decoration;
 	public $z_index;
+	public $content;
 	private $arr_elem= array('background'=>'background',
 							 'background_color'=>'background-color',
 							 'background_image'=>'background-image',
@@ -51,6 +53,7 @@ class Cssstyle_lib
 							 'font_size'=>'font-size',
 							 'font_family'=>'font-family',
 							 'font_weight'=>'font-weight',
+							 'font_style'=>'font-style',
 							 'position'=>'position',
 							 'display'=>'display',
 							 'padding'=>'padding',
@@ -75,7 +78,16 @@ class Cssstyle_lib
 							 'white_space'=>'white-space',
 							 'text_decoration'=>'text-decoration',
 							 'z_index'=>'z-index',
+							 'content'=>'content',
 	);
+	function __construct($style=array())
+    {
+        if(count($style) > 0){            
+            foreach($style as $key=>$val){
+            	$this->$key = $val;
+            }
+        }
+    }
 	public function convert(){
 		$result= array();
 		foreach($this->arr_elem as $key=>$val){

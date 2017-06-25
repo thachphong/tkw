@@ -25,16 +25,39 @@ class Htmldom_lib
 		}
 		return FALSE;
     }
-    public function split_content($total_section){
+    public function reload(){
+		$this->sdom = str_get_html($this->sdom->save());
+	}
+    public function add_content_section($total_section){
     	$element = $this->sdom->find('//div[@id="content"]',0);
 		for($i = 1;$i<=$total_section;$i++){
 			if($element != NULL){
 				$element->innertext .= '<div class="row" id="section_'.$i.'"></div>';
 			}
 		}
-		$this->sdom->save();
+		
+		//$this->sdom->save();
+		$this->save();
+	}
+	public function split_column_section($object_id,$total_column,$main_position = 'left'){
+		$this->reload();
+		$element = $this->sdom->find('//div[@id="'.$object_id.'"]',0);
+		if($total_column == 2 && $main_position =='left'){
+			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_1"> column </div>';
+			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_2"> column </div>';
+		}else if($total_column == 2 && $main_position =='right'){
+			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_1"> column </div>';
+			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_2"> column </div>';
+		}else{
+			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_1"> column </div>';
+			$element->innertext .= '<div class="col-md-6" id="'.$object_id.'_col_2"> column </div>';
+			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_3"> column </div>';
+		}
+		
+		$this->save();
 	}
 	public function split_column($object_id,$total_column){
+		$this->reload();
 		$element = $this->sdom->find('//div[@id="'.$object_id.'"]',0);
 		$colum_class = 12/$total_column;
 		for($i = 1;$i<=$total_column;$i++){
@@ -42,13 +65,21 @@ class Htmldom_lib
 				$element->innertext .= '<div class="col-md-'.$colum_class.'" id="'.$object_id.'_col_'.$i.'"> column </div>';
 			}
 		}
-		$this->sdom->save();
+		//$this->sdom->save();
+		$this->save();
 	}
 	
     public function set_html($obj_id, $str_html){
 		$element = $this->sdom->find('//div[@id="'.$obj_id.'"]',0);
         if($element != NULL){
 			return $element->innertext = $str_html;
+		}
+		$this->sdom->save();
+	}
+	public function append_html($obj_id, $str_html){
+		$element = $this->sdom->find('//div[@id="'.$obj_id.'"]',0);
+        if($element != NULL){
+			return $element->innertext .= $str_html;
 		}
 		$this->sdom->save();
 	}
@@ -76,29 +107,24 @@ class Htmldom_lib
 		}
 	}
     
-    public function add_slides($obj_id){
-		$html ='<h2>Carousel Example</h2>  
-				  <div id="myCarousel" class="carousel <!--slide-->" data-ride="carousel" data-interval="2000">
+    public function add_slides($obj_id,$width,$height,$speed){
+    	$style="width:$width; height:$height";
+		$html ='<div id="myCarousel" class="carousel <!--slide-->" data-ride="carousel" data-interval="'.$speed.'">
+					<%assign var="slides" value=Slides_model::get_slides()%>
 				    <!-- Indicators -->
 				    <ol class="carousel-indicators">
-				      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				      <li data-target="#myCarousel" data-slide-to="1"></li>
-				      <li data-target="#myCarousel" data-slide-to="2"></li>
+				      <%foreach $slides as $key=>$item%>
+				      	  <li data-target="#myCarousel" data-slide-to="<%$key%>" <%if $key==0%>class="active"<%/if%>></li>
+				      <%/foreach%>
 				    </ol>
 
 				    <!-- Wrapper for slides -->
 				    <div class="carousel-inner">
-				      <div class="item active">
-				        <img src="image/11.png" alt="Los Angeles" style="width:100%;">
-				      </div>
-
-				      <div class="item">
-				        <img src="image/33.png" alt="Chicago" style="width:100%;">
-				      </div>
-				    
-				      <div class="item">
-				        <img src="image/22.png" alt="New york" style="width:100%;">
-				      </div>
+				    	<%foreach $slides as $key=>$item%>
+					      <div class="item <%if $key==0%> active<%/if%>">
+					        <img src="<%$smarty.const.ACW_BASE_URL%><%$item.img_path%>" alt="" style="'.$style.';">
+					      </div>
+					    <%/foreach%>
 				    </div>
 
 				    <!-- Left and right controls -->
@@ -111,7 +137,14 @@ class Htmldom_lib
 				      <span class="sr-only">Next</span>
 				    </a>
 				  </div>';
-		return $this->set_html($obj_id,$html);
+		$this->append_html($obj_id,$html);
+		$this->save();
+		
+		/*$css_file = PUBLIC_TEMPLATE_PATH.'/css/style.css';
+		$css = new Cssdom_lib($css_file);
+		$css->create_icon('.fa-chevron-circle-left','"\f137"');
+		$css->create_icon('.fa-chevron-circle-right','"\f138"');*/
+		
 	}
     function to_slug($str) {
     	$str = html_entity_decode($str );
@@ -128,7 +161,7 @@ class Htmldom_lib
 	    return $str;
 	}
 	public function create_basic_html($file_name){
-		$file_name ="index.html";
+		//$file_name ="index.html";
 		$str ='<html>
 					<head>
 						<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -143,7 +176,8 @@ class Htmldom_lib
 				</html>';
 		if(file_exists($file_name)){
 			unlink($file_name);		
-		}				
+		}			
+		ACWLog::debug_var('file',$file_name);	
 		$file = new FilePHP_lib();
 		$file->write_file($file_name,$str);
 		if(strlen($file_name) > 0){            
@@ -184,12 +218,21 @@ class Htmldom_lib
 			<%/foreach%>';
 		//}
 		$ul .="</ul></div>";
-		$this->set_html('header',$ul);
+		$this->append_html('header',$ul);
 		$this->save();
 		$css_file = PUBLIC_TEMPLATE_PATH.'/css/style.css';
 		$css = new Cssdom_lib($css_file);
 		$css->set_menu_style($tyle);
 		//return $ul;
 		return TRUE;
+	}
+	public function add_logo($new_line = TRUE){
+		if($new_line){
+			$str='<div class="row" >
+					  <img src="<%$smarty.const.ACW_BASE_URL%>shared/template1/images/logo.png" />
+         		  </div>';
+			$this->append_html("header",$str);
+			$this->save();
+		}
 	}
 }

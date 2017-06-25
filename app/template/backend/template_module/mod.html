@@ -52,36 +52,11 @@
 					 <div class="row">
 					 	<div class="col-md-12 col-sm-12 col-xs-12">
 					 	<form id="form_setting" action="" class="form-horizontal form-label-left" enctype="multipart/form-data">
-					 		 <!--body -->
-					 		 <%assign var='module_name' value='Body'%> 
-					 		 <%assign var='data_list' value=$body%> 
+					 		 <!--module -->
+					 		 <%assign var='module_name' value='Module'%> 
+					 		 <%assign var='data_list' value=$module%> 
 	                    	 <%include 'template/module.html'%>
-	                    	 <!--end body -->
-	                    	 <!--logo -->
-					 		 <%assign var='module_name' value='Logo'%> 
-					 		 <%assign var='data_list' value=$logo%> 
-	                    	 <%include 'template/module.html'%>
-	                    	 <!--end logo -->
-					 		 <!--menu -->
-					 		 <%assign var='module_name' value='Menu top'%> 
-					 		 <%assign var='data_list' value=$menu_top%> 
-	                    	 <%include 'template/module.html'%>
-	                    	 <!--end menu -->
-					 		 <!--slide -->
-					 		 <%assign var='module_name' value='Slide top'%> 
-					 		 <%assign var='data_list' value=$slide_top%> 
-	                    	 <%include 'template/module.html'%>
-	                    	 <!--end slide -->
-	                    	 <!--content -->
-					 		 <%assign var='module_name' value='Content'%> 
-					 		 <%assign var='data_list' value=$content%> 
-	                    	 <%include 'template/module.html'%>
-	                    	 <!--end content -->
-	                    	 <!--footer -->
-					 		 <%assign var='module_name' value='Footer'%> 
-					 		 <%assign var='data_list' value=$footer%> 
-	                    	 <%include 'template/module.html'%>
-	                    	 <!--end footer -->
+	                    	 <!--end module -->	                    	 
                         	<div class="form-group">
 		                        <div class="col-md-12 col-sm-12" style="text-align: center">
 		                          <!--<a class="dialog_close btn btn-primary" href="<%$smarty.const.ACW_BASE_URL%>template">Thoát</a>-->

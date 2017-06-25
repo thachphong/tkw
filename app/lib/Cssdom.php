@@ -35,6 +35,17 @@ class Cssdom_lib
 		$file = new FilePHP_lib();
 		$file->write_file($this->filename,$str);
 	}
+	public function create_icon($icon_name,$icon_val){
+		$style = new Cssstyle_lib();
+		$style->font_family = 'FontAwesome';
+		$style->content = $icon_val;//'\f137';
+		$style->font_style = 'normal';
+		$style->font_weight = 'normal';
+		$style->text_decoration = 'inherit';
+		$style->padding_right = '0.5em';
+		$style->float = 'right';
+		$this->set_style($icon_name,$style);
+	}
 	public function set_style_mobile($obj_name,$this_style,$new_flg = FALSE){
 		$file_name = str_replace('.css','_mobi.css', $this->filename);
 		//var_dump($this->filename);
@@ -82,7 +93,7 @@ class Cssdom_lib
 		}
 		$style->z_index = 99;
 		//$style->font_family ="Tahoma,Arial,Times New Roman";		
-		$this->set_style('#menu_top ul',$style,TRUE);
+		$this->set_style('#menu_top ul',$style);
 		$style = new Cssstyle_lib();
 		$style->display="block";
 		$style->position = "relative";
