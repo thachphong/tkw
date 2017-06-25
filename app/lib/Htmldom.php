@@ -62,7 +62,7 @@ class Htmldom_lib
 		$colum_class = 12/$total_column;
 		for($i = 1;$i<=$total_column;$i++){
 			if($element != NULL){
-				$element->innertext .= '<div class="col-md-'.$colum_class.'" id="'.$object_id.'_col_'.$i.'"> column </div>';
+				$element->innertext .= '<div class="col-md-'.$colum_class.'" id="'.$object_id.'_col_'.$i.'"></div>';
 			}
 		}
 		//$this->sdom->save();
@@ -77,6 +77,7 @@ class Htmldom_lib
 		$this->sdom->save();
 	}
 	public function append_html($obj_id, $str_html){
+		$this->reload();
 		$element = $this->sdom->find('//div[@id="'.$obj_id.'"]',0);
         if($element != NULL){
 			return $element->innertext .= $str_html;

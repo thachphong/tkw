@@ -35,6 +35,10 @@ class Cssdom_lib
 		$file = new FilePHP_lib();
 		$file->write_file($this->filename,$str);
 	}
+	public function append_style($str){
+		$file = new FilePHP_lib();
+		$file->write_file($this->filename,$str);
+	}
 	public function create_icon($icon_name,$icon_val){
 		$style = new Cssstyle_lib();
 		$style->font_family = 'FontAwesome';

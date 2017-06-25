@@ -167,7 +167,7 @@ class Templatecontent_model extends ACWModel
 							on inn.mod_id = c.mod_inner_id
 				INNER JOIN template t
 							on t.template_id = c.template_id and t.active = 1
-
+				order by c.sort
 				";
 		return $this->query($sql);
 	}

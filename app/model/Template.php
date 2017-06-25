@@ -277,7 +277,7 @@ class Template_model extends ACWModel
 	public static function action_create()
 	{
 		$db = new Template_model();
-		$data = $db->get_structure(1);
+		$data = $db->get_structure();
 		$main_style=array();
 		foreach($data as $row){			
 			$main_style[$row['model']][$row['struct_key']]= $row['struct_val'];			
@@ -305,12 +305,30 @@ class Template_model extends ACWModel
 		if(isset($main_style['content']['total_column'])){
 			$html->split_column_section('section_1',$main_style['content']['total_column'],$main_style['content']['vitri_content']);
 		}
+		if(isset($main_style['footer']['total_column'])){
+			$html->split_column('footer',$main_style['footer']['total_column']);
+		}
+		if(isset($main_style['footer']['background'])){
+			$style = new Cssstyle_lib();
+			$style->background = $main_style['footer']['background'];
+			$css->set_style('#footer',$style);
+		}
+		
+		
 		$content = $db->get_content_list();
 		$css_outner = array();
 		foreach($content as $item){
 			$outner_html = str_replace('[model_name]',$item['con_name'],$item['outner_html']);
 			$html->append_html($item['section_id'].'_'.$item['column_id'],$outner_html);
 			$css_outner[$item['mod_outner_id']] = $item['outner_css'];
+		}
+		foreach($css_outner as $key=>$val){
+			$cssstyle = $db->get_structure($key);
+			$strcss = $val;
+			foreach($cssstyle as $row){
+				$strcss = str_replace('['.$row['struct_key'].']',$row['struct_val'],$strcss);
+			}
+			$css->append_style($strcss);
 		}
 		
 		$html->add_cssfile('<%$smarty.const.ACW_BASE_URL_TEMPLATE%>/css/bootstrap.min.css');	
