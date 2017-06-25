@@ -147,14 +147,6 @@
 		$(document).off('click','#btn_new'); 
         $(document).on('click','#btn_new',function(event){
         	Pho_html_ajax('POST',"<%$smarty.const.ACW_BASE_URL%>template/new" ,{'silde_id':''},function(html){
-                /*Pho_modal({
-		        		template:html,
-				        closeClick: false,
-				        closable: true, 
-				        modalid:"modal1",
-				        size:'large'
-		        	
-            	});*/
             	Pho_modal(html,"Thêm template",700);
             });
         	
@@ -171,11 +163,11 @@
         		return;
         	}
         	var arr = $('#form_ctg').serializeArray();	
-			Pho_json_ajax('POST',"<%$smarty.const.ACW_BASE_URL%>slides/update" ,arr,function(datas){
+			Pho_json_ajax('POST',"<%$smarty.const.ACW_BASE_URL%>template/templateupdate" ,arr,function(datas){
 				if(datas.status =="OK"){
 					Pho_modal_close("modal1");
 					//Pho_message_box("Thông báo",datas.msg);
-					Pho_direct("<%$smarty.const.ACW_BASE_URL%>slides");
+					Pho_direct("<%$smarty.const.ACW_BASE_URL%>template/list");
 				}else{
 					Pho_message_box_error("Lỗi",datas.msg);
 				}

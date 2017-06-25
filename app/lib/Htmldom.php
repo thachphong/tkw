@@ -43,15 +43,15 @@ class Htmldom_lib
 		$this->reload();
 		$element = $this->sdom->find('//div[@id="'.$object_id.'"]',0);
 		if($total_column == 2 && $main_position =='left'){
-			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_1"> column </div>';
-			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_2"> column </div>';
+			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_1"></div>';
+			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_2"></div>';
 		}else if($total_column == 2 && $main_position =='right'){
-			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_1"> column </div>';
-			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_2"> column </div>';
+			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_1"></div>';
+			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_2"></div>';
 		}else{
-			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_1"> column </div>';
-			$element->innertext .= '<div class="col-md-6" id="'.$object_id.'_col_2"> column </div>';
-			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_3"> column </div>';
+			$element->innertext .= '<div class="col-md-3" id="'.$object_id.'_col_1"></div>';
+			$element->innertext .= '<div class="col-md-6" id="'.$object_id.'_col_2"></div>';
+			$element->innertext .= '<div class="col-md-9" id="'.$object_id.'_col_3"></div>';
 		}
 		
 		$this->save();

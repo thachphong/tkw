@@ -8,8 +8,8 @@ class Template_model extends ACWModel
 	public static function action_index()
 	{		
 		$db = new Template_model();
-		$list = $db->get_structure(1);
-		$options = $db->get_option(1);
+		$list = $db->get_structure();
+		$options = $db->get_option();
 		$data =array();
 		//$menu_top = array();
 		foreach($list as $item){			
@@ -25,8 +25,8 @@ class Template_model extends ACWModel
 	{		
 		$param = self::get_param(array('acw_url'));	
 		$db = new Template_model();
-		$list = $db->get_structure(1,$param['acw_url'][0]);
-		$options = $db->get_option(1);
+		$list = $db->get_structure($param['acw_url'][0]);
+		$options = $db->get_option();
 		$data =array();
 		//$menu_top = array();
 		foreach($list as $item){			
@@ -41,7 +41,7 @@ class Template_model extends ACWModel
 	public static function action_mod()
 	{		
 		$db = new Template_model();
-		$data['list'] = $db->get_module_list(1);
+		$data['list'] = $db->get_module_list();
 		
 		
 		return ACWView::template_admin('template_module.html',$data);
@@ -49,10 +49,10 @@ class Template_model extends ACWModel
 	public static function action_content()
 	{		
 		$db = new Template_model();
-		$data['list'] = $db->get_module_list(1);
+		$data['list'] = $db->get_content_list();
 		
 		
-		return ACWView::template_admin('template_module.html',$data);
+		return ACWView::template_admin('template_content.html',$data);
 	}
 	public static function action_list()
 	{		
@@ -78,6 +78,31 @@ class Template_model extends ACWModel
 		$param = $db->get_template_info($param['acw_url'][0]);
 		
 		return ACWView::template_admin('template/edit.html', $param);
+	}
+	public static function action_templateupdate(){
+		$param = self::get_param(array(
+				'template_id',
+			    'template_no',
+				'template_name',	
+				'active',
+			));
+		//$param['template_id'] = 1;
+		$result = array('status' => 'OK');
+		$result['status'] = 'OK';	
+		$result['msg'] = 'Cập nhật thành công!';		
+		$db = new Template_model();
+		$msg = "";//$db->check_validate_update($param);
+		if($msg == ""){
+			if(strlen($param['template_id'])==0){			
+				$db->insert_template($param);
+			}else{
+				$db->update_template($param);
+			}
+		}else{
+			$result['status'] = 'ER';	
+			$result['msg'] = $msg;
+		}
+		return ACWView::json($result);
 	}
 	public static function action_update(){
 		$param = self::get_param(array(
@@ -161,23 +186,82 @@ class Template_model extends ACWModel
 		$this->execute($sql,$sql_par );
 		return TRUE;	
 	}
-	public function get_structure($template_id,$mod_id = 0){
+	private function insert_template($param){		
+		//$login_info = ACWSession::get('user_info');
+		//$param['user_id'] = $login_info['user_id'];		
+		
+		$sql = "INSERT INTO template
+					(	
+					  template_no,
+					  template_name,
+					  active
+					)
+				VALUES
+					(
+					  :template_no,
+					  :template_name,
+					  :active				
+					)
+				";
+		$sql_par =  ACWArray::filter($param, array('template_no','template_name','active'	));			
+		$this->execute($sql,$sql_par );
+		return TRUE;
+	}
+	protected function update_template($param)
+	{				
+		//$login_info = ACWSession::get('user_info');
+		//$param['user_id'] = $login_info['user_id'];	
+		if($param['active']=='1'){
+			$sql="update template set active = 0";
+			$this->execute($sql );
+		}	
+		$sql = "update template
+					set template_no = :template_no,
+					template_name = :template_name,
+					active = :active	
+					where template_id = :template_id
+				";
+		
+ 		$sql_par =  ACWArray::filter($param, array('template_no','template_name','active','template_id'	));			
+		$this->execute($sql,$sql_par );
+		return TRUE;	
+	}
+	public function get_structure($mod_id = 0){
 		$sql="select t.*,d.struct_val ,d.template_detail_id
 				from template_structure  t
 				LEFT JOIN template_detail d
-				on d.struct_id = t.struct_id and d.template_id = :template_id
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
 				where t.mod_id =:mod_id
 				order by sort";
-		return $this->query($sql,array('template_id'=>$template_id,'mod_id'=>$mod_id));
+		return $this->query($sql,array('mod_id'=>$mod_id));
 	}
-	public function get_option($template_id){
+	public function get_option(){
 		$sql="select *
-				from template_option  	";
+				from template_option  	
+				";
 		return $this->query($sql);
 	}
-	public function get_module_list($template_id){
+	public function get_module_list(){
 		$sql="select *
 				from template_module  	";
+		return $this->query($sql);
+	}
+	
+	public function get_content_list(){
+		$sql="select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				";
 		return $this->query($sql);
 	}
 	public function get_template_list(){
@@ -221,6 +305,14 @@ class Template_model extends ACWModel
 		if(isset($main_style['content']['total_column'])){
 			$html->split_column_section('section_1',$main_style['content']['total_column'],$main_style['content']['vitri_content']);
 		}
+		$content = $db->get_content_list();
+		$css_outner = array();
+		foreach($content as $item){
+			$outner_html = str_replace('[model_name]',$item['con_name'],$item['outner_html']);
+			$html->append_html($item['section_id'].'_'.$item['column_id'],$outner_html);
+			$css_outner[$item['mod_outner_id']] = $item['outner_css'];
+		}
+		
 		$html->add_cssfile('<%$smarty.const.ACW_BASE_URL_TEMPLATE%>/css/bootstrap.min.css');	
 		$html->add_cssfile('<%$smarty.const.ACW_BASE_URL_TEMPLATE%>/css/style.css');
 		$html->add_jsfile('<%$smarty.const.ACW_BASE_URL_TEMPLATE%>/js/jquery.min.js');
