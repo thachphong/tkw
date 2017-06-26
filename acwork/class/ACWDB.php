@@ -101,6 +101,11 @@ class ACWDB
 		// FETCH
 		return $this->_internal_fetch($stmt);
 	}
+	protected function query_first($sql, $param=null) {
+		$res = $this->query($sql, $param);
+		if(count($res)>0) return $res[0];
+		return array();
+	}
 
 	/**
 	 * 更新系実行

@@ -1,0 +1,1511 @@
+2017/06/25 15:31:10 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Danh mục sản phẩm',
+  'section_id' => 'section_1',
+  'column_id' => 'col_1',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'con_id' => '2',
+  'sort' => '1',
+)
+2017/06/25 15:31:11 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 15:36:26 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 2
+
+				
+
+2017/06/25 15:36:26 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 15:36:30 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Danh mục sản phẩm',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'con_id' => '2',
+  'sort' => '1',
+)
+2017/06/25 15:36:31 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:41:03 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 22:41:04 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:41:04 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 22:42:35 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 22:42:35 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:47:13 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 22:47:36 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 22:47:36 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:47:36 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 22:49:38 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 22:49:38 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:49:38 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 22:55:00 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 22:55:01 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:55:01 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 22:55:17 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:55:55 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 2
+
+				
+
+2017/06/25 22:55:55 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 22:56:02 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Sản phẩm',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'con_id' => '2',
+  'sort' => '1',
+)
+2017/06/25 22:56:04 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:56:06 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 22:56:28 access ip -> ::1
+INSERT INTO template_content
+					(	
+					  con_name,
+					  section_id,
+					  column_id,
+					  mod_outner_id,
+					  mod_inner_id,
+					  sort,
+					  template_id
+					)
+				VALUES
+					(
+					  :con_name,
+					  :section_id,
+					  :column_id,
+					  :mod_outner_id,
+					  :mod_inner_id	,
+					  :sort,
+					  (select template_id from template where active='1')			
+					)
+				
+array (
+  'con_name' => 'Thông Tin',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'sort' => '1',
+)
+2017/06/25 22:56:30 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:56:35 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 2
+
+				
+
+2017/06/25 22:56:35 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 22:56:39 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Sản phẩm',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'con_id' => '2',
+  'sort' => '2',
+)
+2017/06/25 22:56:40 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:57:22 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 22:57:30 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 22:58:25 access ip -> ::1
+INSERT INTO template_content
+					(	
+					  con_name,
+					  section_id,
+					  column_id,
+					  mod_outner_id,
+					  mod_inner_id,
+					  sort,
+					  template_id
+					)
+				VALUES
+					(
+					  :con_name,
+					  :section_id,
+					  :column_id,
+					  :mod_outner_id,
+					  :mod_inner_id	,
+					  :sort,
+					  (select template_id from template where active='1')			
+					)
+				
+array (
+  'con_name' => 'Sản phẩm bán chạy',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'sort' => '3',
+)
+2017/06/25 22:58:26 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 22:58:36 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 22:58:37 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 22:58:37 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:05:40 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:05:40 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 23:05:40 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:17:03 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:20:15 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:20:40 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:20:44 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:20:44 access ip -> ::1
+select *
+				from template_option  	
+				
+
+2017/06/25 23:21:45 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:22:38 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 23:22:38 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:29:30 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:29:35 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => '2',
+)
+2017/06/25 23:29:35 access ip -> ::1
+select *
+				from template_option  	
+				
+
+2017/06/25 23:29:54 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:29:56 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => '1',
+)
+2017/06/25 23:29:56 access ip -> ::1
+select *
+				from template_option  	
+				
+
+2017/06/25 23:30:28 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:30:31 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => '2',
+)
+2017/06/25 23:30:31 access ip -> ::1
+select *
+				from template_option  	
+				
+
+2017/06/25 23:31:01 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:31:01 access ip -> ::1
+select *
+				from template_option  	
+				
+
+2017/06/25 23:31:11 access ip -> ::1
+INSERT INTO template_detail
+					(					
+					  struct_id,
+					  struct_val,
+					  template_id
+					)
+				VALUES
+					(					  
+					  :struct_id,
+					  :struct_val,
+					  :template_id					
+					)
+				
+array (
+  'template_id' => 1,
+  'struct_id' => '33',
+  'struct_val' => '#ffbb00',
+)
+2017/06/25 23:31:11 access ip -> ::1
+INSERT INTO template_detail
+					(					
+					  struct_id,
+					  struct_val,
+					  template_id
+					)
+				VALUES
+					(					  
+					  :struct_id,
+					  :struct_val,
+					  :template_id					
+					)
+				
+array (
+  'template_id' => 1,
+  'struct_id' => '34',
+  'struct_val' => '13',
+)
+2017/06/25 23:31:11 access ip -> ::1
+INSERT INTO template_detail
+					(					
+					  struct_id,
+					  struct_val,
+					  template_id
+					)
+				VALUES
+					(					  
+					  :struct_id,
+					  :struct_val,
+					  :template_id					
+					)
+				
+array (
+  'template_id' => 1,
+  'struct_id' => '35',
+  'struct_val' => 'Tahoma, Times New Roman, Arial',
+)
+2017/06/25 23:34:31 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:35:07 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:35:23 access ip -> ::1
+INSERT INTO template_content
+					(	
+					  con_name,
+					  section_id,
+					  column_id,
+					  mod_outner_id,
+					  mod_inner_id,
+					  sort,
+					  template_id
+					)
+				VALUES
+					(
+					  :con_name,
+					  :section_id,
+					  :column_id,
+					  :mod_outner_id,
+					  :mod_inner_id	,
+					  :sort,
+					  (select template_id from template where active='1')			
+					)
+				
+array (
+  'con_name' => 'Danh mục',
+  'section_id' => 'section_5',
+  'column_id' => 'col_1',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'sort' => '1',
+)
+2017/06/25 23:35:27 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:35:39 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 5
+
+				
+
+2017/06/25 23:35:39 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:35:46 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Danh mục',
+  'section_id' => 'section_5',
+  'column_id' => 'col_1',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'con_id' => '5',
+  'sort' => '1',
+)
+2017/06/25 23:35:48 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:35:55 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 5
+
+				
+
+2017/06/25 23:35:55 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:36:00 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Danh mục',
+  'section_id' => 'section_5',
+  'column_id' => 'col_1',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'con_id' => '5',
+  'sort' => '6',
+)
+2017/06/25 23:36:01 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:36:06 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:36:22 access ip -> ::1
+INSERT INTO template_content
+					(	
+					  con_name,
+					  section_id,
+					  column_id,
+					  mod_outner_id,
+					  mod_inner_id,
+					  sort,
+					  template_id
+					)
+				VALUES
+					(
+					  :con_name,
+					  :section_id,
+					  :column_id,
+					  :mod_outner_id,
+					  :mod_inner_id	,
+					  :sort,
+					  (select template_id from template where active='1')			
+					)
+				
+array (
+  'con_name' => 'Thông tin liên hệ',
+  'section_id' => 'section_5',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'sort' => '1',
+)
+2017/06/25 23:36:23 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:36:27 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:36:50 access ip -> ::1
+INSERT INTO template_content
+					(	
+					  con_name,
+					  section_id,
+					  column_id,
+					  mod_outner_id,
+					  mod_inner_id,
+					  sort,
+					  template_id
+					)
+				VALUES
+					(
+					  :con_name,
+					  :section_id,
+					  :column_id,
+					  :mod_outner_id,
+					  :mod_inner_id	,
+					  :sort,
+					  (select template_id from template where active='1')			
+					)
+				
+array (
+  'con_name' => 'Thống ke truy cập',
+  'section_id' => 'section_5',
+  'column_id' => 'col_3',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'sort' => '8',
+)
+2017/06/25 23:36:51 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:36:55 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 3
+
+				
+
+2017/06/25 23:36:55 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:37:00 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Thông Tin',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'con_id' => '3',
+  'sort' => '7',
+)
+2017/06/25 23:37:01 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:37:05 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:37:06 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 23:37:06 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:37:06 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 2,
+)
+2017/06/25 23:37:57 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:37:58 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 23:38:39 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:38:39 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 2,
+)
+2017/06/25 23:39:04 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:39:09 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 5
+
+				
+
+2017/06/25 23:39:09 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:39:14 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Danh mục',
+  'section_id' => 'footer',
+  'column_id' => 'col_1',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'con_id' => '5',
+  'sort' => '6',
+)
+2017/06/25 23:39:15 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:39:18 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 3
+
+				
+
+2017/06/25 23:39:18 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:39:34 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 3
+
+				
+
+2017/06/25 23:39:34 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:39:45 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 3
+
+				
+
+2017/06/25 23:39:45 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:39:50 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Thông Tin',
+  'section_id' => 'section_1',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '1',
+  'mod_inner_id' => NULL,
+  'con_id' => '3',
+  'sort' => '1',
+)
+2017/06/25 23:39:51 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:40:07 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 6
+
+				
+
+2017/06/25 23:40:07 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:40:16 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Thông tin liên hệ',
+  'section_id' => 'footer',
+  'column_id' => 'col_2',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'con_id' => '6',
+  'sort' => '7',
+)
+2017/06/25 23:40:17 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:40:22 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				where c.con_id = 7
+
+				
+
+2017/06/25 23:40:23 access ip -> ::1
+select *
+				from template_module  	
+
+2017/06/25 23:40:27 access ip -> ::1
+update template_content
+					set con_name = :con_name,
+					  section_id = :section_id,
+					  column_id  = :column_id,
+					  mod_outner_id = :mod_outner_id,
+					  mod_inner_id = :mod_inner_id,
+					  sort =:sort
+					where con_id = :con_id
+				
+array (
+  'con_name' => 'Thống ke truy cập',
+  'section_id' => 'footer',
+  'column_id' => 'col_3',
+  'mod_outner_id' => '2',
+  'mod_inner_id' => NULL,
+  'con_id' => '7',
+  'sort' => '8',
+)
+2017/06/25 23:40:29 access ip -> ::1
+select c.*,
+				outn.mod_name outner_name,
+				inn.mod_name 	inner_name
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+				order by c.sort
+				
+
+2017/06/25 23:40:32 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:40:32 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 23:40:32 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:40:32 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 2,
+)
+2017/06/25 23:42:03 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 0,
+)
+2017/06/25 23:42:03 access ip -> ::1
+select c.*,
+				outn.html outner_html,
+				outn.css outner_css,
+				inn.html 	inner_html,
+				inn.css inner_css
+				from template_content c 
+				LEFT JOIN template_module  outn 
+							on outn.mod_id = c.mod_outner_id
+				LEFT JOIN template_module  inn 
+							on inn.mod_id = c.mod_inner_id
+				INNER JOIN template t
+							on t.template_id = c.template_id and t.active = 1
+
+				
+
+2017/06/25 23:42:03 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 1,
+)
+2017/06/25 23:42:03 access ip -> ::1
+select t.*,d.struct_val ,d.template_detail_id
+				from template_structure  t
+				LEFT JOIN template_detail d
+				on d.struct_id = t.struct_id and d.template_id = (SELECT template_id from template where active=1)
+				where t.mod_id =:mod_id
+				order by sort
+array (
+  'mod_id' => 2,
+)

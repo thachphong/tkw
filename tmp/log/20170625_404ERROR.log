@@ -1,0 +1,60 @@
+2017/06/25 15:31:13 access ip -> ::1
+404! not found
+HTTP_HOST:localhost
+REQUEST_URI:/thietkeweb/shared/admintemplate/css/bootstrap.min.css.map
+url_level:array (
+  0 => 'shared',
+  1 => 'admintemplate',
+  2 => 'css',
+  3 => 'bootstrap.min.css.map',
+)
+2017/06/25 22:47:13 access ip -> ::1
+404! not found
+HTTP_HOST:localhost
+REQUEST_URI:/thietkeweb/shared/template1/css/bootstrap.min.css.map
+url_level:array (
+  0 => 'shared',
+  1 => 'template1',
+  2 => 'css',
+  3 => 'bootstrap.min.css.map',
+)
+2017/06/25 22:52:31 access ip -> ::1
+404! not found
+HTTP_HOST:localhost
+REQUEST_URI:/thietkeweb/shared/template1/css/bootstrap.min.css.map
+url_level:array (
+  0 => 'shared',
+  1 => 'template1',
+  2 => 'css',
+  3 => 'bootstrap.min.css.map',
+)
+2017/06/25 23:05:52 access ip -> ::1
+404! not found
+HTTP_HOST:localhost
+REQUEST_URI:/thietkeweb/shared/template1/css/bootstrap.min.css.map
+url_level:array (
+  0 => 'shared',
+  1 => 'template1',
+  2 => 'css',
+  3 => 'bootstrap.min.css.map',
+)
+2017/06/25 23:20:24 access ip -> ::1
+404! not found
+HTTP_HOST:localhost
+REQUEST_URI:/thietkeweb/shared/template1/css/bootstrap.min.css.map
+url_level:array (
+  0 => 'shared',
+  1 => 'template1',
+  2 => 'css',
+  3 => 'bootstrap.min.css.map',
+)
+2017/06/25 23:24:17 access ip -> ::1
+404! not found
+HTTP_HOST:localhost
+REQUEST_URI:/thietkeweb/shared/template1/css/bootstrap.min.css.map
+url_level:array (
+  0 => 'shared',
+  1 => 'template1',
+  2 => 'css',
+  3 => 'bootstrap.min.css.map',
+)
