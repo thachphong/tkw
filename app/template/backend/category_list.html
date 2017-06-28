@@ -61,12 +61,24 @@
                   </div>
                   <div class="x_content">
                     <div class="row">
-                    	<div class="col-sm-6">
-                    	</div>
-                    	<div class="col-sm-6">
+                    	<div class="col-sm-8">
+                    	<ul class="nav navbar-left panel_toolbox" > 
+                    	<%if $level_flg > 1%>	
+                    	  <li><label style="padding: 5px 10px  ">Menu cấp 1</label></li>                      
+	                      <li><select class="form-control" id="level_1">
+	                      		<option value=""></option>
+	                      		<%foreach $parent_list1 as $pa%>
+	                      			<option value="<%$pa.ctg_id%>"><%$pa.ctg_name%></option>
+	                      		<%/foreach%>
+                    		</select>
+	                      </li>
+	                    <%/if%>
+	                    </ul>
+	                    </div>
+                    	<div class="col-sm-4">
                     		
                     		<div class="dataTables_filter" style="margin-bottom: 10px">
-                        		<button class="btn btn-primary" id="btn_new">Thêm mới</button>
+                    			<button class="btn btn-primary" id="btn_new">Thêm mới</button>
                         	</div>                      	
                         </div>
                     </div>
@@ -78,8 +90,13 @@
                       <thead>
                         <tr>
                           <th>STT</th>
-                          <th colspan="3">Tên Danh mục</th>
-                          <th>Thêm danh mục con</th>                       
+                          <%if $level_flg == 2%>
+                          	  <th >Menu cấp 1</th>   	
+                          <%elseif $level_flg == 3%>
+                          	  <th >Menu cấp 1</th>
+                          	  <th >Menu cấp 2</th>
+                          <%/if%>
+                          <th>Tên Danh mục</th>
                           <th>Hiện</th>
                           <th>Sửa</th>   
                           <th>Xóa</th>                         
@@ -88,23 +105,15 @@
                       <tbody id="fbody">
                       <%foreach $category as $key=>$item%>
                       	<tr>
-                          <td><%$key+1%></td>
-                          <%if $item.ctg_level == 1%>
-                          	<td colspan="3"><%$item.ctg_name%></td>
-                          <%elseif $item.ctg_level == 2%>
-                          	<td></td>
-                          	<td colspan="2"><%$item.ctg_name%></td>
-                          <%else%>
-                          	<td></td>
-                          	<td></td>
-                          	<td ><%$item.ctg_name%></td>
+                          <td><%$item.sort%></td>
+                          <%if $level_flg == 2%>
+                          	  <td><%$item.ctg_name_1%></td> 	
+                          <%elseif $level_flg == 3%>
+                          	  <td><%$item.ctg_name_2%></td>
+                          	  <td><%$item.ctg_name_1%></td>
                           <%/if%>
-                           
-                          <td>
-                          	<%if $item.ctg_level != 3%>
-                          	<button class="btn btn-info btn-xs add_child" id="add_<%$item.ctg_id%>">Thêm danh mục con</button>
-                          	<%/if%>
-                          </td>                         
+                          	
+                          <td ><%$item.ctg_name%></td>
                           <td>
                           	
                           	<span class="fa <%if $item.del_flg == 1%>fa-square-o<%else%>fa-check-square<%/if%>" style="font-size: 16px;"></span>
@@ -149,7 +158,7 @@
 		}
 		$(document).off('click','#btn_new'); 
         $(document).on('click','#btn_new',function(event){
-        	Pho_html_ajax('POST',"<%$smarty.const.ACW_BASE_URL%>category/new" ,{'ctg_id':'','news_flg':news_flg},function(html){
+        	Pho_html_ajax('POST',"<%$smarty.const.ACW_BASE_URL%>category/new" ,{'ctg_level':'<%$level_flg%>'},function(html){
                 /*Pho_modal({
 		        		template:html,
 				        closeClick: false,
@@ -173,7 +182,7 @@
 				if(datas.status =="OK"){
 					Pho_modal_close("modal1");
 					//Pho_message_box("Thông báo",datas.msg);
-					Pho_direct("<%$smarty.const.ACW_BASE_URL%>category" +action);
+					Pho_direct("<%$smarty.const.ACW_BASE_URL%>category/list/<%$level_flg%>" +action);
 				}else{
 					Pho_message_box_error("Lỗi",datas.msg);
 				}
@@ -190,7 +199,7 @@
 					if(datas.status == "OK"){
 						//Pho_modal_close("modal1");
 						//Pho_message_box("Thông báo",datas.msg);
-						location.href="<%$smarty.const.ACW_BASE_URL%>category"+action;
+						location.href="<%$smarty.const.ACW_BASE_URL%>category/list/<%$level_flg%>"+action;
 					}else{
 						Pho_message_box_error("Lỗi",datas.msg);
 					}
@@ -231,34 +240,30 @@
             	Pho_modal(html,"Thêm Danh mục",600);
             });
         });
-        
-        $("#table_search").keyup(function(){
-		//hide all the rows
-			//alert('sss');
-	          $("#fbody").find("tr").hide();
+        $(document).off('change','#level_1'); 
+        $(document).on('change','#level_1',function(event){
+        	var val = $("#level_1 option:selected").text();
+        	find_table(val);
+        	
+        });
+        $("#table_search").keyup(function(){	
+	          find_table(this.value);
+	    });
+        function find_table(str_val){
+			$("#fbody").find("tr").hide();
 
-		//split the current value of searchInput
-	          var data = this.value.split(" ");
-		//create a jquery object of the rows
-	          var jo = $("#fbody").find("tr");
-	          
-		//Recusively filter the jquery object to get results.
+			//split the current value of searchInput
+	          var data = str_val.split(" ");
+			//create a jquery object of the rows
+	          var jo = $("#fbody").find("tr");	          
+			//Recusively filter the jquery object to get results.
 	          $.each(data, function(i, v){
 	              jo = jo.filter("*:contains('"+v+"')");
 	          });
 	        //show the rows that match.
 	          jo.show();
-	     //Removes the placeholder text  
-	   
-	      }).focus(function(){
-	          this.value="";
-	          $(this).css({"color":"black"});
-	          $(this).unbind('focus');
-	      }).css({"color":"#C0C0C0"});
-
-	 
-
-        
+		}
+		
     });
 </script>
      

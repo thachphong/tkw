@@ -24,15 +24,26 @@
                   <div class="x_content">
                     <br />
                     <form id="form_ctg" action="" class="form-horizontal form-label-left" enctype="multipart/form-data">
+                      <%if $ctg_level > 1%>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Menu cấp 1<span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="form-control select2" name="parent_id_1" id="parent_id_1">
+                          	 <option value=""></option>
+                          	 <%foreach $parent_list1 as $item%>
+                          	 	<option value="<%$item.ctg_id%>" <%if $parent_id_1 == $item.ctg_id%>selected="selected"<%/if%>><%$item.ctg_name%></option>
+                          	 <%/foreach%>                          	 
+                          </select>                          
+                        </div>
+                      </div>
+                      <%/if%>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ctg_name">Tên Danh mục<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="ctg_name" required="required" name="ctg_name" class="form-control col-md-7 col-xs-12" value="<%$ctg_name%>">
-                          <input type="hidden"  name="parent_id" value="<%$parent_id%>" >
                           <input type="hidden"  name="ctg_id" value="<%$ctg_id%>">
                           <input type="hidden"  name="ctg_level" value="<%$ctg_level%>">
-                          <input type="hidden"  name="news_flg" value="<%$news_flg%>">
                         </div>
                       </div>
                       

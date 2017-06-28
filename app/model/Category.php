@@ -16,19 +16,37 @@ class Category_model extends ACWModel
 		$param['news_flg']=0;
 		return ACWView::template_admin('category.html', $param);
 	}
+	public static function action_list()
+	{
+		$param = self::get_param(array('acw_url'));
+		$level_id  = $param['acw_url'][0];	
+		$db = new Category_model();
+		$param['category']=$db->get_ctg_list($level_id);
+		$param['news_flg']=0;
+		$param['level_flg']=$level_id;
+		if($level_id > 1){
+			$param['parent_list1']= $db->get_ctg_list(1);
+		}
+		return ACWView::template_admin('category_list.html', $param);
+	}
 	
 	public static function action_new()
-	{
-		$param = self::get_param(array('news_flg'));
+	{		
+		$param = self::get_param(array('ctg_level'));
 		$param['ctg_id'] = null;
 		$param['ctg_name'] = null;
-		$param['del_flg'] = 0;
-		$param['ctg_level'] = 1;
+		$param['del_flg'] = 0;	
+		$param['sort'] = 1;	
+		if(strlen($param['ctg_level'])==0){
+			$param['ctg_level'] = 1;
+		}
+		$level_id =$param['ctg_level'];
+		$param['parent_id_1']= NULL;
+		$db = new Category_model();
+		if($level_id > 1){			
+			$param['parent_list1']= $db->get_ctg_list(1);
+		}
 		
-		//if(strlen($param['parent_id'])==0){
-			$param['parent_id'] = 0;
-		//}
-		$param['sort'] = 1;
 		return ACWView::template_admin('category/edit.html', $param);
 	}
 	public static function action_ctgnews()
@@ -48,7 +66,9 @@ class Category_model extends ACWModel
 		
 		$db = new Category_model();
 		$result = $db->get_ctg_info($param['my_id']);
-		
+		if($result['ctg_level'] > 1){			
+			$result['parent_list1']= $db->get_ctg_list(1);
+		}
 		return ACWView::template_admin('category/edit.html', $result);
 	}
 	public static function action_addchild()
@@ -79,12 +99,11 @@ class Category_model extends ACWModel
 			'ctg_id'
 			,'ctg_name'
 			, 'ctg_sort'	
-			, 'del_flg'
-			, 'parent_id'
-			, 'ctg_level'
-			,'news_flg'
+			, 'del_flg'		
+			, 'ctg_level'			
+			, 'parent_id_1'
 			));
-		
+		$param['news_flg'] =0;
 		$result = array('status' => 'OK');
 		$result['status'] = 'OK';	
 		$result['msg'] = 'Cập nhật thành công!';		
@@ -184,7 +203,12 @@ class Category_model extends ACWModel
 
 		$login_info = ACWSession::get('user_info');
 		$param['user_id'] = $login_info['user_id'];
-		//$param['ctg_no'] =str_replace(' ','-', ACWModel::convert_vi_to_en( $param['ctg_name']));
+		$param['parent_id']=0;
+		if(isset($param['parent_id_2']) && strlen($param['parent_id_2'])>0){
+			$param['parent_id'] = $param['parent_id_2'];
+		}else if(isset($param['parent_id_1']) && strlen($param['parent_id_1'])>0){
+			$param['parent_id'] = $param['parent_id_1'];
+		}
 		$sql = "INSERT INTO category
 					(
 					ctg_name
@@ -236,8 +260,13 @@ class Category_model extends ACWModel
 		$this->begin_transaction();
 
 		$login_info = ACWSession::get('user_info');
-		$param['user_id'] = $login_info['user_id'];
-		//$param['ctg_no'] =str_replace(' ','-', ACWModel::convert_vi_to_en( $param['ctg_name']));
+		$param['user_id'] = $login_info['user_id'];		
+		$param['parent_id']=0;
+		if(isset($param['parent_id_2']) && strlen($param['parent_id_2'])>0){
+			$param['parent_id'] = $param['parent_id_2'];
+		}else if(isset($param['parent_id_1']) && strlen($param['parent_id_1'])>0){
+			$param['parent_id'] = $param['parent_id_1'];
+		}
 		$sql = "update category
 					set ctg_name = :ctg_name	
 					,ctg_no = :ctg_no				
@@ -312,7 +341,7 @@ class Category_model extends ACWModel
 		$r = $this->query("
 			select ctg_id
 					,ctg_name
-					,parent_id
+					,parent_id as parent_id_1
 					,del_flg					
 					,sort 
 					,ctg_level
@@ -446,6 +475,15 @@ class Category_model extends ACWModel
 				ORDER BY t.sort2";
 		
 		return $this->query($sql);
+	}
+	public function get_ctg_list($level)
+	{
+		return $this->query("select m.ctg_id,m.parent_id, m.ctg_no,m.ctg_name,m.ctg_level,m.del_flg,m.sort,m1.ctg_name ctg_name_1
+				from category m
+				LEFT JOIN category m1 on m1.ctg_id = m.parent_id 
+				where m.ctg_level = $level
+				and  m.news_flg = 0
+				ORDER BY m.sort" );
 	}
 }
 /* ファイルの終わり */
